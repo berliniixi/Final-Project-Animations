@@ -10,6 +10,7 @@ public class PlayerMove : MonoBehaviour
 
     [Header("Player Characteristics")] 
     [SerializeField] private float playerSpeed = 10f;
+    [SerializeField] private float playerRun = 3.5f;
     [SerializeField] private float rotationSpeed = 100f;
     void Start()
     {
@@ -52,14 +53,24 @@ public class PlayerMove : MonoBehaviour
 
     void Running()
     {
-        if (Input.GetKeyDown(KeyCode.Q))
+        if (Input.GetKeyDown(KeyCode.LeftShift))
         {
+
             _animator.SetBool("isRunning" , true);
+
         }
-        else if (Input.GetKeyUp(KeyCode.Q))
+        else if (Input.GetKeyUp(KeyCode.LeftShift))
         {
+            playerRun = 3.5f;
             _animator.SetBool("isRunning" , false);
         }
     }
     
+    void OnTriggerEnter(Collider obj)
+    {
+        if (obj.tag == "Phone")
+        {
+            Debug.Log("phone trigger with the player");
+        }
+    }
 }

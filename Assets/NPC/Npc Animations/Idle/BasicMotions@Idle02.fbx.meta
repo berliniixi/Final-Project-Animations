@@ -1,7 +1,7 @@
 fileFormatVersion: 2
-guid: a3422ad278cd9a94aa3da8e6bff9deea
+guid: 69d59c13a83a7c74a8cc0607ded391ec
 ModelImporter:
-  serializedVersion: 20200
+  serializedVersion: 20101
   internalIDToNameTable:
   - first:
       1: 100000
@@ -419,13 +419,13 @@ ModelImporter:
     second: root
   - first:
       74: 7400000
-    second: Idle01
+    second: Idle02
   - first:
       74: 7400002
-    second: BasicMotions@Idle01
+    second: BasicMotions@Idle02 - Idle01
   - first:
       74: 7400004
-    second: BasicMotions@Idle01 - Idle02
+    second: BasicMotions@Idle02
   - first:
       95: 9500000
     second: //RootNode
@@ -458,11 +458,11 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: BasicMotions@Idle01
-      takeName: BasicMotions@Idle01
+      name: BasicMotions@Idle02
+      takeName: BasicMotions@Idle02
       internalID: 0
       firstFrame: 0
-      lastFrame: 89
+      lastFrame: 86
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -487,8 +487,8 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: BasicMotions@Idle01 - Idle02
-      takeName: BasicMotions@Idle01 - Idle02
+      name: BasicMotions@Idle02 - Idle01
+      takeName: BasicMotions@Idle02 - Idle01
       internalID: 0
       firstFrame: 0
       lastFrame: 51
@@ -498,7 +498,7 @@ ModelImporter:
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
-      loopTime: 0
+      loopTime: 1
       loopBlend: 0
       loopBlendOrientation: 1
       loopBlendPositionY: 1
@@ -1323,12 +1323,11 @@ ModelImporter:
     hasTranslationDoF: 0
     hasExtraRoot: 1
     skeletonHasParents: 1
-  lastHumanDescriptionAvatarSource: {fileID: 9000000, guid: 5917c0e93d180a842b61d1ebc62a195c, type: 3}
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
   autoGenerateAvatarMappingIfUnspecified: 1
   animationType: 3
   humanoidOversampling: 1
-  avatarSetup: 2
-  addHumanoidExtraRootOnlyWhenUsingAvatar: 0
+  avatarSetup: 1
   additionalBone: 0
   userData: 
   assetBundleName: 

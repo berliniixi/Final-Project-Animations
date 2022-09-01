@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 7431148939413557955}
   m_Layer: 0
   m_Name: PhoneBox
-  m_TagString: Untagged
+  m_TagString: Phone
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -108,10 +108,9 @@ GameObject:
   - component: {fileID: 2300002}
   - component: {fileID: 7431148939413557950}
   - component: {fileID: 7431148939413557951}
-  - component: {fileID: 7431148939413557954}
   m_Layer: 0
   m_Name: PhoneBootStand_03
-  m_TagString: Phone
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -210,18 +209,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 87.970505, y: 60.161938, z: 178.59381}
   m_Center: {x: 43.98529, y: 30.080969, z: 89.296906}
---- !u!114 &7431148939413557954
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 100002}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 38e04a41e01c99f49ae4dd83ea5aa524, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &100004
 GameObject:
   m_ObjectHideFlags: 0
