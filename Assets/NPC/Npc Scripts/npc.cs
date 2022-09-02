@@ -15,7 +15,7 @@ public class npc : MonoBehaviour
     {
         if (obj.tag == "Player")
         {
-            _animator.SetBool("Talking" ,true);
+            _animator.SetTrigger("Talking");
         }
     }
 
