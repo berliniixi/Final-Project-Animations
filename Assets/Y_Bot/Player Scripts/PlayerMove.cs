@@ -1,9 +1,5 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using System.Net;
-using Packages.Rider.Editor.Util;
-using TMPro;
-using UnityEditorInternal;
 using UnityEngine;
 
 public class PlayerMove : MonoBehaviour
@@ -11,13 +7,21 @@ public class PlayerMove : MonoBehaviour
 
     [Header("Player Components")] 
     private Animator _animator;
+    [SerializeField] private Transform phone;
+    [SerializeField] private Transform receiver;
+    [SerializeField] private Transform hand;
     
     [Header("Player Characteristics")] 
     
     [SerializeField] private float playerSpeed = 10f;
     [SerializeField] private float rotationSpeed = 100f;
 
-    [SerializeField] private bool playerCollideWith; 
+    [SerializeField] private bool playerCollideWith;  // bool value to switch off and on the player controller movements
+
+    public static GameObject controlledBy;
+    
+    [SerializeField] private float weight = 1;
+
     void Start()
     {
         _animator = GetComponent<Animator>();
@@ -30,7 +34,7 @@ public class PlayerMove : MonoBehaviour
 
     void Move()
     {
-        if (playerCollideWith)
+        if (playerCollideWith || controlledBy != null)
         {
             return;
         }
@@ -78,24 +82,26 @@ public class PlayerMove : MonoBehaviour
             _animator.SetBool("isRunning" , false);
         }
     }
-
-    void OnTriggerEnter(Collider obj)
+    
+    void OnTriggerStay(Collider obj)        //The player can not move when he answer the phone until the animation stops 
+    
     {
+        Debug.Log("phone trigger with the player");
         if (obj.tag == "Phone" && Input.GetKeyDown(KeyCode.F))
         {
-            Debug.Log("phone trigger with the player");
             _animator.SetBool("isWalking" , false);
             _animator.SetBool("isRunning" , false);
+            _animator.SetBool("isAnswering" , true);
             playerCollideWith = true;
+            Debug.Log("F was pressed");
             _animator.SetTrigger("picking");
         }
     }
-    
-    void OnTriggerExit(Collider obj)
+
+    public void PlayerCollidesEnd() // this method is for the animation event, when the player stop talking to phone 
+                                    // playerCollideWith it became false to give the player the ability to control the player again
     {
-        if (obj.tag == "Player")
-        {
-            playerCollideWith = false;
-        }
+        playerCollideWith = false;
     }
+    
 }

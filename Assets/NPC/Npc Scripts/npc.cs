@@ -6,6 +6,7 @@ public class npc : MonoBehaviour
 {
     private Animator _animator;
     private PlayerMove _playerMove;
+    
     void Start()
     {
         _animator = GetComponent<Animator>();
@@ -16,8 +17,13 @@ public class npc : MonoBehaviour
     {
         if (obj.tag == "Player")
         {
-            _animator.SetTrigger("Talking");
             Debug.Log("You have to call the...");
+            _playerMove.PlayerCollidesEnd();
+            _animator.SetTrigger("Talking");
         }
+    }
+    public void EnableThePlayerMoveAfterNPCsStopTalking()
+    {
+        _playerMove.PlayerCollidesEnd();
     }
 }
