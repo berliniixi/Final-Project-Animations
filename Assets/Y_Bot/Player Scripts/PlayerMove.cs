@@ -16,7 +16,7 @@ public class PlayerMove : MonoBehaviour
     [SerializeField] private float playerSpeed = 10f;
     [SerializeField] private float rotationSpeed = 100f;
 
-    [SerializeField] private bool playerCollideWith;  // bool value to switch off and on the player controller movements
+    [SerializeField]  bool playerCollideWith;  // bool value to switch off and on the player controller movements
 
     public static GameObject controlledBy;
     
@@ -34,9 +34,15 @@ public class PlayerMove : MonoBehaviour
 
     void Move()
     {
-        if (playerCollideWith || controlledBy != null)
+        if (playerCollideWith)      //  if player collide with something, do not let it move
         {
             return;
+        }
+
+        if (controlledBy != null)   // if player click the mouse, the control goes to the mouse and the player can not control the player with WASD; 
+        {
+            return;
+            
         }
         
         float translation = Input.GetAxis("Vertical") * playerSpeed * Time.deltaTime;
@@ -58,7 +64,6 @@ public class PlayerMove : MonoBehaviour
         else
         {
             _animator.SetBool("isWalking" , false);
-            
         }
 
         Running();
@@ -84,7 +89,6 @@ public class PlayerMove : MonoBehaviour
     }
     
     void OnTriggerStay(Collider obj)        //The player can not move when he answer the phone until the animation stops 
-    
     {
         Debug.Log("phone trigger with the player");
         if (obj.tag == "Phone" && Input.GetKeyDown(KeyCode.F))
@@ -99,9 +103,32 @@ public class PlayerMove : MonoBehaviour
     }
 
     public void PlayerCollidesEnd() // this method is for the animation event, when the player stop talking to phone 
-                                    // playerCollideWith it became false to give the player the ability to control the player again
+                                    // playerCollideWith it became false to give the player the ability to control it again
     {
         playerCollideWith = false;
+        _animator.SetBool("isAnswering" , false);
+        _animator.ResetTrigger("picking");
+    }
+    
+    void OnAnimatorIK(int layerIndex)
+    {
+        weight = _animator.GetFloat("IKPickup");
+        if (weight > 0.7f && _animator.GetBool("isAnswering"))
+        {
+            phone.parent = hand;
+            phone.localPosition = new Vector3(0f, 0.094f, 0.054f); // position of the telephone get after the player hold it in her hand
+            phone.localRotation = Quaternion.Euler(0,0,0);  // rotation of the telephone get after the player hold it in her hand
+        }
+        else if (weight < 0.7f && !_animator.GetBool("isAnswering"))
+        {
+            Debug.LogError("i am here");
+            phone.parent = receiver;
+            phone.localPosition = Vector3.zero;
+            phone.localRotation = Quaternion.identity;
+        }
+        
+        _animator.SetIKPosition(AvatarIKGoal.RightHand , receiver.position);
+        _animator.SetIKPositionWeight(AvatarIKGoal.RightHand , weight);
     }
     
 }

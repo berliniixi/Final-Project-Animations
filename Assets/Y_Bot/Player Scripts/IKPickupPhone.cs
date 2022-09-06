@@ -37,39 +37,42 @@ public class IKPickupPhone : MonoBehaviour
             anchor.transform.position.z - Player.transform.position.z); // TelephoneBooth position - Character position in the z-axis
         
         Quaternion rot = Quaternion.LookRotation(targetDir); // LookRotation method-> is for turning the player to the targetDir()  
-        Player.transform.rotation = Quaternion.Slerp(Player.transform.rotation, rot, 0.05f);
+        Player.transform.rotation = Quaternion.Slerp(Player.transform.rotation, rot, 0.05f);    //create a smoothly rotation from a to b in some specific time
         
         // Distance() Returns the distance between a and b
-                        
-        if (!(Vector3.Distance(Player.transform.position, anchor.transform.position) < 0.4f)) return; // Check the distance of the player from the target(TelephoneBooth)
-            
-        // if it's less than the 0.4f then it will do the follow
-            
-        _animator.SetBool("isAnswering" , true);           
-        _animator.SetBool("isWalking", false);
 
-        Player.transform.rotation = anchor.transform.rotation; // the Character takes the current rotation of TelephoneBooth (Anchor)
+        if (Vector3.Distance(Player.transform.position, anchor.transform.position) < 0.4f)  // Check the distance of the player from the target(TelephoneBooth)
+        
+            // if it's less than the 0.4f then it will do the follow
 
-        isWalkingTowards = false;
-        standingNear = true;
+        {
+            _animator.SetBool("isAnswering" , true);           
+            _animator.SetBool("isWalking", false);
+
+            Player.transform.rotation = anchor.transform.rotation; // the Character takes the current rotation of TelephoneBooth (Anchor)
+
+            isWalkingTowards = false;
+            standingNear = true;
+        }
     }
 
-    void OnMouseDown()
+    void OnMouseDown()      // mouse click 
     {
         if (!standingNear)
         {
             _animator.SetFloat("direction" , 1);
             _animator.SetBool("isWalking", true);
-            isWalkingTowards = true; 
-            PlayerMove.controlledBy= gameObject;
+            isWalkingTowards = true;
+            PlayerMove.controlledBy = gameObject;
         }
-        else
+        else  
         {
             _animator.SetBool("isAnswering", false);
             _playerMove.PlayerCollidesEnd();
             isWalkingTowards = false;
             PlayerMove.controlledBy = null;
             standingNear = false;
+            Debug.LogError("I am False now");
         }
     }
     
@@ -78,7 +81,7 @@ public class IKPickupPhone : MonoBehaviour
         AnimLerp();
     }
     
-    void AnimLerp()
+    void AnimLerp()    
     {
         if (!standingNear) return;
 
