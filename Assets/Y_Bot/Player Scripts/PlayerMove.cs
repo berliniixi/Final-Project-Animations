@@ -34,7 +34,7 @@ public class PlayerMove : MonoBehaviour
 
     void Move()
     {
-        if (playerCollideWith)      //  if player collide with something, do not let it move
+        if (playerCollideWith)       //  if player collide with something, do not let it move
         {
             return;
         }
@@ -42,7 +42,6 @@ public class PlayerMove : MonoBehaviour
         if (controlledBy != null)   // if player click the mouse, the control goes to the mouse and the player can not control the player with WASD; 
         {
             return;
-            
         }
         
         float translation = Input.GetAxis("Vertical") * playerSpeed * Time.deltaTime;
@@ -75,7 +74,7 @@ public class PlayerMove : MonoBehaviour
         {
             return;
         }
-        
+
         if (Input.GetKeyDown(KeyCode.LeftShift))
         {
 
@@ -90,14 +89,12 @@ public class PlayerMove : MonoBehaviour
     
     void OnTriggerStay(Collider obj)        //The player can not move when he answer the phone until the animation stops 
     {
-        Debug.Log("phone trigger with the player");
         if (obj.tag == "Phone" && Input.GetKeyDown(KeyCode.F))
         {
             _animator.SetBool("isWalking" , false);
             _animator.SetBool("isRunning" , false);
             _animator.SetBool("isAnswering" , true);
             playerCollideWith = true;
-            Debug.Log("F was pressed");
             _animator.SetTrigger("picking");
         }
     }
@@ -121,7 +118,6 @@ public class PlayerMove : MonoBehaviour
         }
         else if (weight < 0.7f && !_animator.GetBool("isAnswering"))
         {
-            Debug.LogError("i am here");
             phone.parent = receiver;
             phone.localPosition = Vector3.zero;
             phone.localRotation = Quaternion.identity;

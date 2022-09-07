@@ -35,9 +35,10 @@ public class IKPickupPhone : MonoBehaviour
         (anchor.transform.position.x - Player.transform.position.x, // TelephoneBooth position - Character position in the x-axis
             0f,
             anchor.transform.position.z - Player.transform.position.z); // TelephoneBooth position - Character position in the z-axis
-        
         Quaternion rot = Quaternion.LookRotation(targetDir); // LookRotation method-> is for turning the player to the targetDir()  
         Player.transform.rotation = Quaternion.Slerp(Player.transform.rotation, rot, 0.05f);    //create a smoothly rotation from a to b in some specific time
+
+        Player.transform.Translate(targetDir * Time.deltaTime * 0.6f); 
         
         // Distance() Returns the distance between a and b
 
@@ -53,8 +54,10 @@ public class IKPickupPhone : MonoBehaviour
 
             isWalkingTowards = false;
             standingNear = true;
+            
         }
     }
+    
 
     void OnMouseDown()      // mouse click 
     {
@@ -85,7 +88,7 @@ public class IKPickupPhone : MonoBehaviour
     {
         if (!standingNear) return;
 
-        if (Vector3.Distance(Player.transform.position ,anchor.transform.position) > 0.1f)
+        if (Vector3.Distance(Player.transform.position ,anchor.transform.position) > 0.3f)
         {
             Player.transform.rotation = Quaternion.Lerp(        // Rotation
                 Player.transform.rotation,   // Form this rotation
