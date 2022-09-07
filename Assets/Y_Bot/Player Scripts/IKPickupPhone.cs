@@ -54,7 +54,7 @@ public class IKPickupPhone : MonoBehaviour
 
             isWalkingTowards = false;
             standingNear = true;
-            
+            FindObjectOfType<ShowUI>().HideMessage();
         }
     }
     

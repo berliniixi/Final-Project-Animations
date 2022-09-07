@@ -94,6 +94,7 @@ public class PlayerMove : MonoBehaviour
             _animator.SetBool("isWalking" , false);
             _animator.SetBool("isRunning" , false);
             _animator.SetBool("isAnswering" , true);
+            FindObjectOfType<ShowUI>().HideMessage();
             playerCollideWith = true;
             _animator.SetTrigger("picking");
         }
@@ -116,7 +117,7 @@ public class PlayerMove : MonoBehaviour
             phone.localPosition = new Vector3(0f, 0.094f, 0.054f); // position of the telephone get after the player hold it in her hand
             phone.localRotation = Quaternion.Euler(0,0,0);  // rotation of the telephone get after the player hold it in her hand
         }
-        else if (weight < 0.7f && !_animator.GetBool("isAnswering"))
+        else if (weight > 0.7f && !_animator.GetBool("isAnswering"))
         {
             phone.parent = receiver;
             phone.localPosition = Vector3.zero;
